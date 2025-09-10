@@ -1,19 +1,28 @@
-<main>
-    <header>
-        <app-header></app-header>
-    </header>
+<main class="min-h-screen flex flex-col bg-gray-100">
 
-    <aside>
-        <app-aside></app-aside>
+  <!-- Header -->
+  <header class="bg-white shadow-md p-4">
+    <app-header></app-header>
+  </header>
+
+  <!-- Main content (flex grow area) -->
+  <div class="flex flex-1 flex-col lg:flex-row overflow-hidden">
+
+    <!-- Aside -->
+    <aside class="bg-gray-200 w-full lg:w-64 p-4 overflow-y-auto">
+      <app-aside></app-aside>
     </aside>
 
-    <section>
-        <router-outlet></router-outlet>
+    <!-- Section -->
+    <section class="flex-1 p-4 overflow-y-auto">
+      <router-outlet></router-outlet>
     </section>
 
+  </div>
 
-    <footer>
-        <app-footer></app-footer>
-    </footer>
+  <!-- Footer -->
+  <footer class="bg-white text-gray-700 shadow-inner p-4 text-center">
+    <app-footer></app-footer>
+  </footer>
 
 </main>

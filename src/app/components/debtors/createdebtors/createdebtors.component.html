@@ -1,0 +1,71 @@
+<div class="mx-auto w-full max-w-[880px] rounded-xl bg-white p-4 sm:p-6 shadow-sm">
+  <h2 class="mb-4 text-lg font-semibold text-slate-800">Agregar Deudor</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="grid grid-cols-12 gap-3">
+
+    <!-- NOMBRE -->
+    <div class="col-span-12 md:col-span-6">
+      <label for="nombre" class="block mb-1 text-sm font-medium text-slate-700">Nombre</label>
+      <input id="nombre" type="text" pInputText formControlName="nombre"
+             class="w-full text-sm px-3 py-2"/>
+      <small class="block mt-1 text-xs text-red-600"
+             *ngIf="f['nombre'].touched && f['nombre'].errors?.['required']">El nombre es obligatorio.</small>
+    </div>
+
+    <!-- DOCUMENTO -->
+    <div class="col-span-12 md:col-span-6">
+      <label for="documento" class="block mb-1 text-sm font-medium text-slate-700">Documento</label>
+      <input id="documento" type="text" pInputText formControlName="documento"
+             class="w-full text-sm px-3 py-2"/>
+      <small class="block mt-1 text-xs text-red-600"
+             *ngIf="f['documento'].touched && f['documento'].errors?.['required']">
+        El documento es obligatorio.
+      </small>
+    </div>
+
+    <!-- TELÉFONO -->
+    <div class="col-span-12 md:col-span-6">
+      <label for="telefono" class="block mb-1 text-sm font-medium text-slate-700">Teléfono</label>
+      <input id="telefono" type="text" pInputText formControlName="telefono"
+             class="w-full text-sm px-3 py-2"/>
+      <small class="block mt-1 text-xs text-red-600"
+             *ngIf="f['telefono'].touched && f['telefono'].errors?.['required']">
+        El teléfono es obligatorio.
+      </small>
+    </div>
+
+    <!-- CORREO -->
+    <div class="col-span-12 md:col-span-6">
+      <label for="correo" class="block mb-1 text-sm font-medium text-slate-700">Correo</label>
+      <input id="correo" type="email" pInputText formControlName="correo"
+             class="w-full text-sm px-3 py-2"/>
+      <small class="block mt-1 text-xs text-red-600"
+             *ngIf="f['correo'].touched && f['correo'].errors?.['email']">
+        El correo no es válido.
+      </small>
+    </div>
+
+    <!-- DIRECCIÓN -->
+    <div class="col-span-12">
+      <label for="direccion" class="block mb-1 text-sm font-medium text-slate-700">Dirección</label>
+      <input id="direccion" type="text" pInputText formControlName="direccion"
+             class="w-full text-sm px-3 py-2"/>
+      <small class="block mt-1 text-xs text-red-600"
+             *ngIf="f['direccion'].touched && f['direccion'].errors?.['required']">
+        La dirección es obligatoria.
+      </small>
+    </div>
+
+
+    <!-- ACCIONES -->
+    <div class="col-span-12">
+      <div class="mt-3 flex items-center justify-end gap-2">
+        <p-button label="Cancelar" severity="secondary" [size]="'small'"
+                  (onClick)="onCancel()" type="button"></p-button>
+        <p-button label="Guardar" icon="pi pi-check" [size]="'small'"
+                  type="submit" [disabled]="form.invalid"></p-button>
+      </div>
+    </div>
+
+  </form>
+</div>
