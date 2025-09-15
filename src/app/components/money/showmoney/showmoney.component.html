@@ -1,1 +1,55 @@
-<p>caja</p>
+<div class="p-6 bg-white rounded-lg shadow-md">
+  <!-- Título y botón Crear Movimiento -->
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-2xl font-bold text-gray-700">Movimientos de Caja</h2>
+    <button 
+      pButton 
+      label="Crear Movimiento" 
+      icon="pi pi-plus" 
+      class="p-button-success"
+      [routerLink]="['/dinero/crear']">
+    </button>
+  </div>
+
+  <!-- Tabla de Movimientos -->
+  <p-table [value]="movements" class="shadow-md rounded-lg overflow-hidden">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Fecha</th>
+        <th>Tipo</th>
+        <th>Monto</th>
+        <th>Descripción</th>
+        <th>Medio de Pago</th>
+        <th>Responsable</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-m>
+      <tr>
+        <td>{{ m.fecha | date:'short' }}</td>
+        <td>
+          <span [ngClass]="{
+                  'text-green-600 font-bold': m.tipo === 'ingreso',
+                  'text-red-600 font-bold': m.tipo === 'egreso'
+                }">
+            {{ m.tipo | titlecase }}
+          </span>
+        </td>
+        <td>{{ m.monto | currency:'COP' }}</td>
+        <td>{{ m.descripcion }}</td>
+        <td>{{ m.medioPago | titlecase }}</td>
+        <td>{{ m.responsable }}</td>
+        <td>
+          <button 
+            pButton 
+            type="button" 
+            label="Eliminar" 
+            class="p-button-danger p-button-sm" 
+            (click)="onDelete(m.id)">
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

@@ -1,66 +1,44 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { DebtorsService } from '../../../services/debtor.service';
+import { Debtor } from '../../../models/debtors';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
-
-// PrimeNG
-import { InputTextModule } from 'primeng/inputtext';
-import { SelectModule } from 'primeng/select';
 import { ButtonModule } from 'primeng/button';
-import { InputMaskModule } from 'primeng/inputmask';
-
-type StatusType = 'ACTIVE' | 'INACTIVE';
+import { InputTextModule } from 'primeng/inputtext';
+import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
   selector: 'app-createdebtor',
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    RouterModule,
-    InputTextModule,
-    SelectModule,
-    ButtonModule,
-    InputMaskModule
-  ],
+  imports: [CommonModule, FormsModule, ButtonModule, InputTextModule, DropdownModule],
   templateUrl: './createdebtors.component.html',
   styleUrls: ['./createdebtors.component.css']
 })
 export class CreatedebtorsComponent {
-  private fb = inject(FormBuilder);
-  private router = inject(Router);
+  debtor: Debtor = {
+    id: 0,
+    name: '',
+    email: '',
+    phone: '',
+    address: '',
+    documents: 0,
+    status: 'active'
+  };
 
-  statusOptions: { label: string; value: StatusType }[] = [
-    { label: 'Activo', value: 'ACTIVE' },
-    { label: 'Inactivo', value: 'INACTIVE' }
+  statuses = [
+    { label: 'Activo', value: 'active' },
+    { label: 'Inactivo', value: 'inactive' }
   ];
 
-  form: FormGroup = this.fb.group({
-    nombre: ['', [Validators.required, Validators.minLength(2)]],
-    correo: ['', [Validators.required, Validators.email]],
-    telefono: ['', [Validators.required, Validators.pattern(/^\d{7,15}$/)]],
-    direccion: ['', [Validators.required, Validators.minLength(5)]],
-    documento: ['', [Validators.required, Validators.pattern(/^\d{6,15}$/)]],
-    status: ['ACTIVE' as StatusType, [Validators.required]]
-  });
+  constructor(private debtorsService: DebtorsService, private router: Router) {}
 
-  get f() {
-    return this.form.controls;
-  }
-
-  onSubmit() {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      return;
-    }
-    const payload = this.form.value;
-    // TODO: Reemplazar con tu servicio real:
-    // this.debtorsService.create(payload).subscribe(() => this.router.navigate(['/deudores']));
-    console.log('Deudor a guardar:', payload);
+  saveDebtor() {
+    this.debtorsService.addDebtor(this.debtor);
     this.router.navigate(['/deudores']);
   }
+  cancel() {
+  this.router.navigate(['/deudores']);
+}
 
-  onCancel() {
-    this.router.navigate(['/deudores']);
-  }
 }

@@ -1,1 +1,75 @@
-<p>createbriefcase works!</p>
+<div class="p-6 max-w-2xl mx-auto bg-white rounded shadow">
+
+  <h2 class="text-2xl font-bold mb-6">Crear Cartera</h2>
+
+  <form (ngSubmit)="saveCartera()" class="space-y-4">
+
+    <!-- Cliente -->
+    <div>
+    <label class="block mb-1 font-medium">Seleccionar Cliente</label>
+    <p-dropdown 
+        [options]="clientes" 
+        optionLabel="name" 
+        placeholder="Seleccione un cliente" 
+        [(ngModel)]="cartera.clienteId" 
+        name="clienteId" 
+        (onChange)="onClienteChange($event.value)" 
+        class="w-full">
+    </p-dropdown>
+    </div>
+
+
+    <!-- Producto -->
+    <div>
+      <label class="block mb-1 font-medium">Producto de Crédito</label>
+      <input type="text" pInputText [(ngModel)]="cartera.producto" name="producto" required class="w-full"/>
+    </div>
+
+    <!-- Capital, Intereses, Mora -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div>
+        <label class="block mb-1 font-medium">Capital</label>
+        <input type="number" pInputText [(ngModel)]="cartera.capital" name="capital" required class="w-full"/>
+      </div>
+      <div>
+        <label class="block mb-1 font-medium">Intereses</label>
+        <input type="number" pInputText [(ngModel)]="cartera.intereses" name="intereses" required class="w-full"/>
+      </div>
+      <div>
+        <label class="block mb-1 font-medium">Mora</label>
+        <input type="number" pInputText [(ngModel)]="cartera.mora" name="mora" class="w-full"/>
+      </div>
+    </div>
+
+    <!-- Estado -->
+    <div>
+      <label class="block mb-1 font-medium">Estado</label>
+      <p-dropdown [options]="estados" optionLabel="label" [(ngModel)]="cartera.estado" name="estado" placeholder="Selecciona estado" class="w-full"></p-dropdown>
+    </div>
+
+    <!-- Fechas -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label class="block mb-1 font-medium">Fecha Desembolso</label>
+        <p-calendar [(ngModel)]="cartera.fechaDesembolso" name="fechaDesembolso" class="w-full"></p-calendar>
+      </div>
+      <div>
+        <label class="block mb-1 font-medium">Fecha Vencimiento</label>
+        <p-calendar [(ngModel)]="cartera.fechaVencimiento" name="fechaVencimiento" class="w-full"></p-calendar>
+      </div>
+    </div>
+
+    <!-- Total Pagado -->
+    <div>
+      <label class="block mb-1 font-medium">Total Pagado</label>
+      <input type="number" pInputText [(ngModel)]="cartera.totalPagado" name="totalPagado" class="w-full"/>
+    </div>
+
+    <!-- Botones -->
+    <div class="flex justify-end gap-4 mt-6">
+      <button pButton label="Cancelar" class="p-button-secondary" (click)="cancel()" type="button"></button>
+      <button pButton label="Guardar" class="p-button-success" type="submit"></button>
+    </div>
+
+  </form>
+</div>

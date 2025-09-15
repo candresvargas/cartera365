@@ -1,1 +1,63 @@
-<p>createguarantees works!</p>
+<div class="p-6 max-w-lg mx-auto bg-white rounded-xl shadow-md">
+  <h2 class="text-2xl font-bold mb-6">Crear Garantía</h2>
+
+  <form (ngSubmit)="saveGuarantee()" class="space-y-4">
+
+    <!-- Cliente / Deudor -->
+    <div>
+    <label class="block mb-1 font-medium">Cliente</label>
+    <p-dropdown 
+        [options]="debtors" 
+        [(ngModel)]="guarantee.idPrestamo" 
+        optionLabel="name" 
+        optionValue="id"
+        placeholder="Seleccione cliente"
+        name="idPrestamo"
+        class="w-full">
+    </p-dropdown>
+    </div>
+
+    <!-- Préstamo -->
+    <div>
+      <label class="block mb-1 font-medium">Préstamo</label>
+      <input type="number" [(ngModel)]="guarantee.idPrestamo" name="idPrestamo" pInputText required
+             class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+    </div>
+
+    <!-- Tipo -->
+    <div>
+      <label class="block mb-1 font-medium">Tipo de Garantía</label>
+      <p-dropdown [options]="tipos" [(ngModel)]="guarantee.tipo" name="tipo" placeholder="Seleccione tipo"
+                  class="w-full"></p-dropdown>
+    </div>
+
+    <!-- Valor Estimado -->
+    <div>
+      <label class="block mb-1 font-medium">Valor Estimado</label>
+      <input type="number" [(ngModel)]="guarantee.valorEstimado" name="valorEstimado" pInputText required
+             class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+    </div>
+
+    <!-- Documento Digital -->
+    <div>
+      <label class="block mb-1 font-medium">Documento Digital (URL)</label>
+      <input type="text" [(ngModel)]="guarantee.documentoAdjunto" name="documentoAdjunto" pInputText
+             placeholder="Ingrese URL del documento"
+             class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+    </div>
+
+    <!-- Estado -->
+    <div>
+      <label class="block mb-1 font-medium">Estado</label>
+      <p-dropdown [options]="estados" [(ngModel)]="guarantee.estado" name="estado" placeholder="Seleccione estado"
+                  class="w-full"></p-dropdown>
+    </div>
+
+    <!-- Botones -->
+    <div class="flex justify-end space-x-3 mt-6">
+      <button pButton type="button" label="Cancelar" class="p-button-secondary" (click)="cancel()"></button>
+      <button pButton type="submit" label="Guardar" class="p-button-success"></button>
+    </div>
+
+  </form>
+</div>

@@ -1,1 +1,36 @@
-<p>retrasos</p>
+<div class="p-6 bg-white shadow-md rounded-lg">
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-xl font-semibold">Listado de Moras</h2>
+    <button pButton label="Crear Mora" icon="pi pi-plus" class="p-button-success" routerLink="/moras/crear"></button>
+  </div>
+
+  <p-table [value]="delays" class="w-full">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>ID Mora</th>
+        <th>ID Préstamo</th>
+        <th>Fecha Vencimiento</th>
+        <th>Fecha Pago</th>
+        <th>Días de Mora</th>
+        <th>Interés Mora</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-delay>
+      <tr>
+        <td>{{ delay.id }}</td>
+        <td>{{ delay.idPrestamo }}</td>
+        <td>{{ delay.fechaVencimiento }}</td>
+        <td>{{ delay.fechaPago || '-' }}</td>
+        <td>{{ delay.diasMora }}</td>
+        <td>{{ delay.interesMora | currency:'COP':'symbol':'1.0-0' }}</td>
+        <td>{{ delay.estado }}</td>
+        <td class="flex space-x-2">
+          <button pButton icon="pi pi-trash" class="p-button-danger p-button-sm" (click)="onDelete(delay.id)"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

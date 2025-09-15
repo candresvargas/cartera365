@@ -1,1 +1,65 @@
-<p>createloans works!</p>
+<div class="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">
+  <h2 class="text-2xl font-bold mb-6 text-gray-700">Nuevo Préstamo</h2>
+
+  <form (ngSubmit)="onSubmit()" class="space-y-4">
+    <!-- Selección del deudor -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-2">Deudor</label>
+      <p-dropdown
+        [options]="debtors"
+        [(ngModel)]="selectedDebtor"
+        name="debtor"
+        optionLabel="name"
+        placeholder="Selecciona un deudor"
+        class="w-full"
+      ></p-dropdown>
+    </div>
+
+    <!-- Monto -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-2">Monto</label>
+      <p-inputNumber
+        [(ngModel)]="loan.amount"
+        name="amount"
+        mode="currency"
+        currency="USD"
+        class="w-full"
+      ></p-inputNumber>
+    </div>
+
+    <!-- Tasa -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-2">Tasa (%)</label>
+      <p-inputNumber
+        [(ngModel)]="loan.rate"
+        name="rate"
+        [minFractionDigits]="2"
+        suffix="%"
+        class="w-full"
+      ></p-inputNumber>
+    </div>
+
+    <!-- Plazo -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-2">Plazo (meses)</label>
+      <p-inputNumber
+        [(ngModel)]="loan.term"
+        name="term"
+        [min]="1"
+        [max]="120"
+        class="w-full"
+      ></p-inputNumber>
+    </div>
+
+    <!-- Botón -->
+    <div class="flex justify-end">
+      <button
+        pButton
+        type="submit"
+        label="Guardar"
+        icon="pi pi-save"
+        class="p-button-success"
+      ></button>
+    </div>
+  </form>
+</div>

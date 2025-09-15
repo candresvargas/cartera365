@@ -1,1 +1,56 @@
-<p>createpayments works!</p>
+<div class="p-6 max-w-lg mx-auto bg-white rounded-xl shadow-md space-y-6">
+  <!-- Seleccionar Cliente -->
+  <div>
+    <label class="block text-sm font-medium mb-1">Cliente</label>
+    <p-dropdown
+      [options]="debtors"
+      optionLabel="name"
+      optionValue="id"
+      [(ngModel)]="payment.debtorId"
+      placeholder="Seleccione un cliente"
+      class="w-full"
+    ></p-dropdown>
+  </div>
+
+  <!-- Fecha de Pago -->
+  <div>
+    <label class="block text-sm font-medium mb-1">Fecha de Pago</label>
+    <p-calendar [(ngModel)]="payment.fechaPago" dateFormat="yy-mm-dd" class="w-full"></p-calendar>
+  </div>
+
+  <!-- Monto Pagado -->
+  <div>
+    <label class="block text-sm font-medium mb-1">Monto Pagado</label>
+    <input type="number" pInputText [(ngModel)]="payment.montoPagado" class="w-full" />
+  </div>
+
+  <!-- Tipo de Pago -->
+  <div>
+    <label class="block text-sm font-medium mb-1">Tipo de Pago</label>
+    <p-dropdown [options]="tiposPago" [(ngModel)]="payment.tipoPago" class="w-full"></p-dropdown>
+  </div>
+
+  <!-- Medio de Pago -->
+  <div>
+    <label class="block text-sm font-medium mb-1">Medio de Pago</label>
+    <p-dropdown [options]="mediosPago" [(ngModel)]="payment.medioPago" class="w-full"></p-dropdown>
+  </div>
+
+  <!-- Referencia -->
+  <div>
+    <label class="block text-sm font-medium mb-1">Referencia</label>
+    <input type="text" pInputText [(ngModel)]="payment.referencia" class="w-full" />
+  </div>
+
+  <!-- Estado -->
+  <div>
+    <label class="block text-sm font-medium mb-1">Estado</label>
+    <p-dropdown [options]="estados" [(ngModel)]="payment.estado" class="w-full"></p-dropdown>
+  </div>
+
+  <!-- Botones -->
+  <div class="flex justify-end space-x-2 pt-4">
+    <button pButton label="Cancelar" class="p-button-secondary" (click)="cancel()"></button>
+    <button pButton label="Guardar" (click)="savePayment()"></button>
+  </div>
+</div>

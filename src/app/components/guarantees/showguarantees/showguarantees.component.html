@@ -1,1 +1,39 @@
-<p>garantias</p>
+<div class="p-6">
+  <!-- Botón Crear Garantía -->
+  <div class="flex justify-end mb-4">
+    <button pButton label="Crear Garantía" icon="pi pi-plus" class="p-button-success" routerLink="/garantias/crear"></button>
+  </div>
+
+  <!-- Tabla de Garantías -->
+  <p-table [value]="guarantees" class="shadow rounded-lg overflow-hidden">
+
+    <ng-template pTemplate="header">
+      <tr class="bg-blue-100 text-left">
+        <th class="px-4 py-2">ID</th>
+        <th class="px-4 py-2">Préstamo</th>
+        <th class="px-4 py-2">Tipo</th>
+        <th class="px-4 py-2">Valor Estimado</th>
+        <th class="px-4 py-2">Documento</th>
+        <th class="px-4 py-2">Estado</th>
+        <th class="px-4 py-2">Acciones</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-guarantee>
+      <tr class="border-b hover:bg-gray-50">
+        <td class="px-4 py-2">{{guarantee.id}}</td>
+        <td class="px-4 py-2">{{guarantee.idPrestamo}}</td>
+        <td class="px-4 py-2 capitalize">{{guarantee.tipo}}</td>
+        <td class="px-4 py-2">{{guarantee.valorEstimado | currency}}</td>
+        <td class="px-4 py-2">
+          <a *ngIf="guarantee.documentoAdjunto" [href]="guarantee.documentoAdjunto" target="_blank" class="text-blue-600 hover:underline">Ver</a>
+        </td>
+        <td class="px-4 py-2 capitalize">{{guarantee.estado}}</td>
+        <td class="px-4 py-2">
+          <button pButton icon="pi pi-trash" class="p-button-danger p-button-sm" (click)="onDelete(guarantee.id)"></button>
+        </td>
+      </tr>
+    </ng-template>
+
+  </p-table>
+</div>
